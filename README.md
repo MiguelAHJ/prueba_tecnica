@@ -18,7 +18,7 @@ Base de datos Postgres
 Instalación
 Clonar el Repositorio:
 
-git clone https://github.com/tu-usuario/concesionario-de-carros.git
+git clone https://github.com/MiguelAHJ/prueba_tecnica.git
 
 Instalar Dependencias:
 
