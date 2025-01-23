@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CarrosController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,11 +17,18 @@ use Illuminate\Support\Facades\Route;
 Route::view('/', 'welcome');
 
 Route::view('dashboard', 'dashboard')
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified', 'check.age'])
     ->name('dashboard');
 
 Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
+
+Route::middleware(['auth', 'verified', 'check.age'])->group(function () {
+    Route::controller(CarrosController::class)->group(function () {
+        Route::get('/carros/edit/{carro:id_carro}', 'edit')->name('carros.edit');
+        Route::get('/carros/create', 'create')->name('carros.create');
+    });
+});
 
 require __DIR__.'/auth.php';

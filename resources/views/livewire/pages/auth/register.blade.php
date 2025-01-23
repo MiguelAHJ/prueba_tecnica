@@ -15,6 +15,7 @@ new #[Layout('layouts.guest')] class extends Component
     public string $email = '';
     public string $password = '';
     public string $password_confirmation = '';
+    public int $edad = 0;
 
     /**
      * Handle an incoming registration request.
@@ -25,6 +26,7 @@ new #[Layout('layouts.guest')] class extends Component
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'string', 'confirmed', Rules\Password::defaults()],
+            'edad' => ['required', 'integer', 'min:1', 'max:100'],
         ]);
 
         $validated['password'] = Hash::make($validated['password']);
@@ -51,6 +53,12 @@ new #[Layout('layouts.guest')] class extends Component
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input wire:model="email" id="email" class="block mt-1 w-full" type="email" name="email" required autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        </div>
+
+        <div class="mt-4">
+            <x-input-label for="edad" :value="__('Edad')" />
+            <x-text-input wire:model="edad" id="edad" class="block mt-1 w-full" type="edad" name="edad" required autocomplete="edad" />
+            <x-input-error :messages="$errors->get('edad')" class="mt-2" />
         </div>
 
         <!-- Password -->
